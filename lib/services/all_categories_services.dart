@@ -1,3 +1,5 @@
+// ignore_for_file: missing_required_param
+
 import 'package:store_app/helper/api.dart';
 
 class AllCategoriesServices {
