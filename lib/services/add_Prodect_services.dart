@@ -19,6 +19,6 @@ class AddProdectServices {
       'image': image,
       'category': category,
     });
-    return ProdSeructModel.fromJson(data);
+    return ProductModel.fromJson(data);
   }
 }
