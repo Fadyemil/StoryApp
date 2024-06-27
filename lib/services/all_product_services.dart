@@ -27,15 +27,20 @@ class AllProductServices {
     http.Response response =
         await http.get(Uri.parse('https://fakestoreapi.com/products'));
 
-    // *Decode the response body text into a dynamic list
-    List<dynamic> data = jsonDecode(response.body);
-    // Initialize a list to store the ProductModel objects
-    List<ProductModel> productsList = [];
-    // & Iterate over each item in the received data, convert it to a ProductModel object, and add it to the list
-    for (var i = 0; i < data.length; i++) {
-      productsList.add(ProductModel.fromJson(data[i]));
+    if (response.statusCode == 200) {
+      // *Decode the response body text into a dynamic list
+      List<dynamic> data = jsonDecode(response.body);
+      // Initialize a list to store the ProductModel objects
+      List<ProductModel> productsList = [];
+      // & Iterate over each item in the received data, convert it to a ProductModel object, and add it to the list
+      for (var i = 0; i < data.length; i++) {
+        productsList.add(ProductModel.fromJson(data[i]));
+      }
+      // &Return the list of products
+      return productsList;
+    } else {
+      throw Exception(
+          'there is a problem with the status code ${response.statusCode}');
     }
-    // &Return the list of products
-    return productsList;
   }
 }

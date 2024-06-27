@@ -8,7 +8,12 @@ class AllCategoriesServices {
         .get(Uri.parse('https://fakestoreapi.com/products/categories'));
 
     // *Decode the response body text into a dynamic list
-    List<dynamic> data = jsonDecode(response.body);
-    return data;
+    if (response.statusCode == 200) {
+      List<dynamic> data = jsonDecode(response.body);
+      return data;
+    } else {
+      throw Exception(
+          'there is a problem with the status code ${response.statusCode}');
+    }
   }
 }
